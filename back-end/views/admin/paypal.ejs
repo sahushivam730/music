@@ -1,0 +1,69 @@
+<%-include('./inc/header');%>
+
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page-title">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-xl-4">
+                            <div class="page-title-content">
+                                <h3>Paypal Transactions</h3>
+                                <p class="mb-2">Welcome to HeatKings</p>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="breadcrumbs"><a href="/admin/dashboard">Dashboard </a><span><i class="ri-arrow-right-s-line"></i></span><a href="#">Paypal Transactions</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-12">
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Paypal Transactions </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive api-table">
+                                    <table class="table">
+                                        <thead>
+                                           <tr>
+                                              <th>Sr.</th>
+                                              <th>Name</th>
+                                              <th>Email</th>
+                                              <th>Amount</th>
+                                              <th>Payerid</th>
+                                              <th>Paymentid</th>
+                                              <th>Paid</th>
+                                              <!-- <th>Date</th> -->
+                                           </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%paypal_transactions.forEach(function(paypal,index){%>
+                                                <tr>
+                                                    <td><%=index+1%></td>
+                                                    <td><%=username%></td>
+                                                    <td><%=paypal.email%></td>
+                                                    <td>$ <%=paypal.amount%></td>
+                                                    <td><%=paypal.payerid%></td>
+                                                    <td><%=paypal.paymentid%></td>
+                                                    <td><%=(paypal.paid==1)?'paid':'failed'%></td> 
+                                                    <!-- <td><%=paypal.datetime%></td>                                                    -->
+                                                </tr>
+                                           <%})%>
+                                        </tbody>
+                                     </table>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-include('./inc/footer');%>

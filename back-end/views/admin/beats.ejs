@@ -1,0 +1,483 @@
+<%-include('./inc/header');%>
+<link rel="stylesheet" href="https://foliotek.github.io/Croppie/croppie.css">
+<style>
+    .img-error{
+        color: #DC3545;
+        bottom: 0;
+        margin-bottom: -22px;
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: 6px;
+    }
+    #type-error{
+        position: absolute;
+        bottom: 180px;
+        left: 22px;
+    }
+    #demo_beat-error{
+        color: #DC3545;
+        bottom: 0;
+        margin-bottom: -22px;
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: 6px;
+    }
+    #org_beat-error{
+        color: #DC3545;
+        bottom: 0;
+        margin-bottom: -22px;
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: 6px;
+    }
+    #org_beat-error2{
+        color: #DC3545;
+        bottom: 0;
+        margin-bottom: -22px;
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: 6px;
+    }
+    #org_beat-error3{
+        color: #DC3545;
+        bottom: 0;
+        margin-bottom: -22px;
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: 6px;
+    }
+    /* .cr-image{
+        opacity: 1 !important;
+    }
+    .cr-overlay{
+        min-width: 100px;
+        min-height: 100px;
+    } */
+</style>
+<div class="content-body" style="min-height: 839px;">
+    <div class="container">
+        <div class="row active">
+            <div class="col-xl-12">
+                <div class="page-title">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-xl-4">
+                            <div class="page-title-content">
+                                <h3>Beats</h3>
+                                <p class="mb-2">Welcome to Kings Music Beats page</p>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="breadcrumbs"><a href="<%=base_url%>dashboard">Dashboard </a><span><i class="ri-arrow-right-s-line"></i></span><a href="<%=base_url%>dashboard/beats">Beats</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-12 col-xl-12 show">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Upload Beats</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="save-beat" action="<%=base_url%>admin/save-beat" method="POST">
+                                    <div class="alert alert-success" style="display: <%=(successmsg.length>0)?'block':'none';%>;">
+                                        <%=successmsg%>
+                                    </div>
+                                    <div class="alert alert-danger" style="display: <%=(failedmsg.length>0)?'block':'none';%>;">
+                                        <%=failedmsg%>
+                                    </div>
+                                    <div class="row g-3">
+                                        
+                                        <div class="col-xl-2 col-md-2">
+                                            <label class="form-label">Genre</label>
+                                            <select  class="form-select" name="genre">
+                                                <%genres.forEach(function(genre,index){%>
+                                                    <option value="<%=genre.id%>"><%=genre.name%></option>
+                                                <%})%>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-5 col-md-5">
+                                            <label class="form-label">Title</label>
+                                            <input type="text" name="title" class="form-control" placeholder="Enter genre name">
+                                        </div>
+                                        <div class="col-xl-5 col-md-5">
+                                            <label class="form-label">Artist</label>
+                                            <input type="text" name="artist" class="form-control" placeholder="Enter artist name">
+                                        </div>
+                                        <div class="col-xl-12 col-md-12">
+                                            <label class="form-label">Description</label>
+                                            <textarea name="description" class="form-control" ></textarea>
+                                        </div>
+                                        <div class="col-xl-12 col-md-12">
+                                            <label class="form-label">Type</label></br>
+                                            <input type="checkbox" class="form-check-input" name="featured" value="1" id="exampleCheck1" >
+                                            <label class="form-check-label" for="exampleCheck1">Featured</label>
+                                        </div>
+                                        <div class="col-xl-12 col-md-12">
+                                            <input type="checkbox" class="form-check-input" name="exclusive" value="2" id="exampleCheck2">
+                                            <label class="form-check-label" for="exampleCheck2">Exclusive</label>
+                                        </div>
+                                        <div class="col-xl-2 col-md-2" >
+                                            <label class="form-label">Demo Beat</label></br>
+                                            <input type="file" name="demo_beat" id="selectbeat" class="form-control" style="display: none;" accept="audio/mp3" />
+                                            <input type="hidden" name="demobeatdata" id="demobeatdata" value=""/>
+                                            <input type="hidden" name="demobeattype" id="demobeattype" value=""/>
+                                            <label class="btn btn-success" for="selectbeat" >Select Audio</label></br>
+                                            <label id="demo_beat-error" class="demo_beat-error" for="demo_beat" style="display: none;">This field is required.</label>
+                                        </div>
+                                        <div class="col-xl-10 col-md-10" >
+                                            <div id="preview_demo_audio"></div>
+                                        </div>
+                                        
+                                        <div class="col-xl-2 col-md-2" >
+                                            <label class="form-label">Original Beat(.mp3)</label></br>
+                                            <input type="file" name="org_beat" id="orgbeat" class="form-control" style="display: none;" accept="audio/mp3" />
+                                            <input type="hidden" name="orgbeatdata" id="orgbeatdata" value=""/>
+                                            <input type="hidden" name="orgbeattype" id="orgbeattype" value=""/>
+                                            <label class="btn btn-success" for="orgbeat" >Select Audio</label></br>
+                                            <label id="org_beat-error" class="org_beat-error" for="org_beat" style="display: none;">This field is required.</label>
+                                        </div>
+                                        <div class="col-xl-2 col-md-2" >
+                                            <label class="form-label">Price</label>
+                                            <input type="number" name="price1" class="form-control">
+                                        </div>
+                                        <div class="col-xl-8 col-md-8" >
+                                            <label class="form-label">O/P</label>
+                                            <div id="original_demo_audio"></div>
+                                        </div>
+
+                                        <div class="col-xl-2 col-md-2" >
+                                            <label class="form-label">Original Beat(.wav)</label></br>
+                                            <input type="file" name="org_beat2" id="orgbeat2" class="form-control" style="display: none;" accept="audio/wav" />
+                                            <input type="hidden" name="orgbeatdata2" id="orgbeatdata2" value=""/>
+                                            <input type="hidden" name="orgbeattype2" id="orgbeattype2" value=""/>
+                                            <label class="btn btn-success" for="orgbeat2" >Select Audio</label></br>
+                                            <label id="org_beat-error2" class="org_beat-error2" for="org_beat2" style="display: none;">This field is required.</label>
+                                        </div>
+                                        <div class="col-xl-2 col-md-2" >
+                                            <label class="form-label">Price</label>
+                                            <input type="number" name="price2" class="form-control" >
+                                        </div>
+                                        <div class="col-xl-8 col-md-8" >
+                                            <label class="form-label">O/P</label>
+                                            <div id="original_demo_audio2"></div>
+                                        </div>
+                                        <div class="col-xl-2 col-md-2" >
+                                            <label class="form-label">Original Beat(exclusive)</label></br>
+                                            <input type="file" name="org_beat3" id="orgbeat3" class="form-control" style="display: none;" accept="audio/*" />
+                                            <input type="hidden" name="orgbeatdata3" id="orgbeatdata3" value=""/>
+                                            <input type="hidden" name="orgbeattype3" id="orgbeattype3" value=""/>
+                                            <label class="btn btn-success" for="orgbeat3" >Select Audio</label></br>
+                                            <label id="org_beat-error3" class="org_beat-error3" for="org_beat3" style="display: none;">This field is required.</label>
+                                        </div>
+                                        <div class="col-xl-2 col-md-2" >
+                                            <label class="form-label">Price</label>
+                                            <input type="number" name="price3" class="form-control" >
+                                        </div>
+                                        <div class="col-xl-8 col-md-8" >
+                                            <label class="form-label">O/P</label>
+                                            <div id="original_demo_audio3"></div>
+                                        </div>
+                                        <div class="col-xl-12 col-md-12" >
+                                            <label class="form-label">Cover Image</label></br>
+                                            <input type="file" name="img" id="selectimg" class="form-control" style="display: none;" accept="image/jpeg,image/png,image/jpg" />
+                                            <input type="hidden" id="img" name="genre_img" value=""/>
+                                            <label class="btn btn-success" for="selectimg" >Select Cover</label></br>
+                                            <label id="img-error" class="img-error" for="img" style="display: none;">This field is required.</label>
+                                        </div>  
+                                        <div id="preview" style="text-align: center;"></div>
+                                        <div class="col-auto">
+                                            <button type="submit" class="btn btn-primary save">Upload Beat</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">All Beats</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive api-table">
+                                    <table class="table">
+                                        <thead>
+                                           <tr>
+                                              <th>Sr.</th>
+                                              <th>Cover</th>
+                                              <th>Genre</th>
+                                              <th>Title</th>
+                                              <th>Artist</th>
+                                              <th>Type</th>
+                                              <th>Demo Beat</th>
+                                              <th>Original Beat</th>
+                                              <th style="text-align: left;">Action</th>
+                                           </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%beats.forEach(function(beat,index){%>
+                                                <tr>
+                                                    <td><%=index+1%></td>
+                                                    <td>
+                                                        <% if(beat.thumb !== "") { %>
+                                                            <img src="<%=beat.thumb%>" alt="" width="50">
+                                                            <% } else { %>
+                                                            <img src="<%=base_url%>admin/uploads/genres/r_music4.jpg" alt="" width="50">
+                                                            <% } %>
+                                                    <td><%=beat.genrename%></td>
+                                                    <td><%=beat.title%></td>
+                                                    <td><%=beat.artist%></td>
+                                                    <td>
+                                                        <%if(beat.type==1){%>
+                                                            Featured
+                                                            <%}else{%>
+                                                                Exclusive
+                                                                <%}%>
+                                                    </td>
+                                                    <td>
+                                                        <audio controls controlsList="nodownload">
+                                                            <source src="<%=beat.demo_beat%>" type="audio/mpeg">
+                                                            Your browser does not support the audio tag.
+                                                          </audio>
+                                                    </td>
+                                                    <td>
+                                                        <audio controls controlsList="nodownload">
+                                                            <source src="<%=beat.original_beat1%>" type="audio/mpeg">
+                                                            Your browser does not support the audio tag.
+                                                          </audio>
+                                                    </td>
+                                                    <!-- <td><i class="ri-volume-up-fill" style="font-size: 25px;color: #0c8a8a;cursor: pointer;" onclick="play('<%=beat.demo_beat%>')"></i>&nbsp;<i class="ri-pause-circle-fill" style="font-size: 25px;color: #0c8a8a;cursor: pointer;" onclick="pause('<%=beat.demo_beat%>')" ></i></td> -->
+                                                    <!-- <td><i class="ri-volume-up-fill" style="font-size: 25px;color: #b10e24;cursor: pointer;" onclick="play('<%=beat.original_beat%>')"></i>&nbsp;<i class="ri-pause-circle-fill" style="font-size: 25px;color: #0c8a8a;cursor: pointer;" onclick="pause('<%=beat.demo_beat%>')" ></i></td> -->
+                                                    <td>
+                                                        <div class="form-check form-switch"><input type="checkbox" onclick="changestatus(<%=beat.id%>,<%=beat.status%>)" class="form-check-input" <%=(beat.status==1)?'checked=""':''%>  /></div>
+                                                    </td>
+                                                </tr>
+                                           <%})%>
+                                        </tbody>
+                                     </table>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add-images" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cover Image</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div id="upload-image"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> <button class="btn btn-success cropped_image" data-dismiss="modal">Crop Image</button> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%-include('./inc/footer');%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" ></script> -->
+<script src="https://foliotek.github.io/Croppie/croppie.js"></script>
+<script>
+    function changestatus(id,status){
+        if(status==0){
+            status=1
+        }else{
+            status=0
+        }
+        $.ajax({
+            type: "POST",
+            url: "<%=base_url%>admin/beat-enable-disable-status?id="+id+"&status="+status,
+            success: function(data){window.location.reload()}      
+        });
+    }
+    function play(path) {
+        var audio = new Audio("<%=base_url%>"+path);
+        audio.loop = false;
+        audio.play();
+    }
+
+    $(function(){
+        $('#save-beat').validate({
+                rules: {
+                    title: {
+                        required: true,
+                    },
+                    artist: {
+                        required: true,
+                    },
+                    price1: {
+                        required: true
+                    },
+                    price2: {
+                        required: true
+                    },
+                    price3: {
+                        required: true
+                    }
+                },
+                submitHandler: function(form) {
+                    if($('#demobeatdata').val()==''){
+                        $('#demo_beat-error').css('display','block')
+                        return false;
+                    }
+                    if($('#orgbeatdata').val()==''){
+                        $('#org_beat-error').css('display','block')
+                        return false;
+                    }
+                    if($('#orgbeatdata2').val()==''){
+                        $('#org_beat-error2').css('display','block')
+                        return false;
+                    }
+                    if($('#orgbeatdata3').val()==''){
+                        $('#org_beat-error3').css('display','block')
+                        return false;
+                    }
+                    // if($('#img').val()==''){
+                    //     $('#img-error').css('display','block')
+                    //     return false;
+                    // }
+                    $('.save').text('Loading...')
+                    form.submit();
+                }
+            });
+
+        $image_crop = $('#upload-image').croppie({
+            enableExif: true,
+            viewport: {
+                width: 406,
+                height: 406,
+                type: 'square'
+            },
+            boundary: {
+                width: 506,
+                height: 506
+            }
+            // enforceBoundary: false,
+            // enableExif: true,
+        });
+
+        $('#selectimg').on('change', function() {
+            let img = $(this);
+            var reader = new FileReader();
+            $("#preview").empty();
+            $('#img').val('')
+            reader.onload = function(e) {
+                $image_crop.croppie('bind', {
+                    url: e.target.result
+                }).then(function() {
+                    console.log('jQuery bind complete');
+                });
+            }
+            reader.readAsDataURL(this.files[0]);
+            $("#add-images").modal('show')
+        });
+        
+        $('.cropped_image').on('click', function(ev) {
+            $image_crop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function(response) {
+                $("#preview").empty();
+                $("#preview").append(`<img src="`+response+`">`)
+                $('#img').val(response)
+                $('#img-error').css('display','none')
+            });
+        });
+        
+        $('#selectbeat').on('change', function() {
+            let audio = $(this);
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#demobeatdata').val(e.target.result)
+                var type = e.target.result.split(';')
+                type = type[0].split(':')
+                type = type[1]
+                $('#demobeattype').val(type)
+                $('#preview_demo_audio').empty()
+                $('#preview_demo_audio').append(`
+                    <audio controls  controlsList='nodownload'>
+                    <source src="`+e.target.result+`" type="`+type+`">
+                    Your browser does not support the audio element.
+                </audio>`)
+                $('#demo_beat-error').css('display','none')
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+        $('#orgbeat').on('change', function() {
+            let audio = $(this);
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#orgbeatdata').val(e.target.result)
+                var type = e.target.result.split(';')
+                type = type[0].split(':')
+                type = type[1]
+                $('#orgbeattype').val(type)
+                $('#original_demo_audio').empty()
+                $('#original_demo_audio').append(`
+                
+                    <audio controls  controlsList='nodownload'>
+                    <source src="`+e.target.result+`" type="`+type+`">
+                    Your browser does not support the audio element.
+                </audio>`)
+                $('#org_beat-error').css('display','none')
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+        $('#orgbeat2').on('change', function() {
+            let audio = $(this);
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#orgbeatdata2').val(e.target.result)
+                var type = e.target.result.split(';')
+                type = type[0].split(':')
+                type = type[1]
+                $('#orgbeattype2').val(type)
+                $('#original_demo_audio2').empty()
+                $('#original_demo_audio2').append(`
+                
+                    <audio controls  controlsList='nodownload'>
+                    <source src="`+e.target.result+`" type="`+type+`">
+                    Your browser does not support the audio element.
+                </audio>`)
+                $('#org_beat-error2').css('display','none')
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+        $('#orgbeat3').on('change', function() {
+            let audio = $(this);
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#orgbeatdata3').val(e.target.result)
+                var type = e.target.result.split(';')
+                type = type[0].split(':')
+                type = type[1]
+                $('#orgbeattype3').val(type)
+                $('#original_demo_audio3').empty()
+                $('#original_demo_audio3').append(`
+                
+                    <audio controls  controlsList='nodownload'>
+                    <source src="`+e.target.result+`" type="`+type+`">
+                    Your browser does not support the audio element.
+                </audio>`)
+                $('#org_beat-error3').css('display','none')
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+    })
+</script>

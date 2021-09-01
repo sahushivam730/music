@@ -1,0 +1,224 @@
+<%-include('./inc/header');%>
+<!-- <link rel="stylesheet" href="assets/css/croppie.css"> -->
+<link rel="stylesheet" href="https://foliotek.github.io/Croppie/croppie.css">
+<style>
+    .img-error{
+        color: #DC3545;
+        bottom: 0;
+        margin-bottom: -22px;
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: 6px;
+    }
+</style>
+<div class="content-body" style="min-height: 839px;">
+    <div class="container">
+        <div class="row active">
+            <div class="col-xl-12">
+                <div class="page-title">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-xl-4">
+                            <div class="page-title-content">
+                                <h3>Genres</h3>
+                                <p class="mb-2">Welcome to Kings Music Genres page</p>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="breadcrumbs"><a href="<%=base_url%>dashboard">Dashboard </a><span><i class="ri-arrow-right-s-line"></i></span><a href="<%=base_url%>dashboard/genres">Genres</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-12 col-xl-12 show">
+                <div class="row">
+                    <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-xs-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Add Genre</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="save-genre" action="<%=base_url%>admin/save-genre" method="POST">
+                                    <div class="alert alert-success" style="display: <%=(successmsg.length>0)?'block':'none';%>;">
+                                        <%=successmsg%>
+                                    </div>
+                                    <div class="alert alert-danger" style="display: <%=(failedmsg.length>0)?'block':'none';%>;">
+                                        <%=failedmsg%>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-xl-12 col-md-12">
+                                            <label class="form-label">Name</label>
+                                            <input type="text" name="genre_name" class="form-control" placeholder="Enter genre name">
+                                        </div>
+                                        <div class="col-xl-12 col-md-12">
+                                            <label class="form-label">Description</label>
+                                            <textarea name="description" class="form-control" placeholder="Enter Description"></textarea>
+                                        </div>
+                                        <div class="col-xl-12 col-md-12" id='box'>
+                                            <input type="file" name="img" id="selectimg" class="form-control" style="display: none;" accept="image/jpeg,image/png,image/jpg" />
+                                            <input type="hidden" id="img" name="genre_img" value=""/>
+                                            <label class="btn btn-success" for="selectimg" >Select Image</label></br>
+                                            <label id="img-error" class="img-error" for="img" style="display: none;">This field is required.</label>
+                                        </div>
+                                        <div id="preview" style="text-align: center;"></div>
+                                        <div class="col-auto">
+                                            <button type="submit" class="btn btn-primary save">Add Gener</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-xs-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">All Genres</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive api-table">
+                                    <table class="table">
+                                        <thead>
+                                           <tr>
+                                              <th>Sr.</th>
+                                              <th>Image</th>
+                                              <th>Genre Name</th>
+                                              <th>Status</th>
+                                              <th>Action</th>
+                                           </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%genres.forEach(function(genre,index){%>
+                                                <tr>
+                                                    <td><%=index+1%></td>
+
+                                                    <td><% if(genre.img !== "") { %>
+                                                        <img src="<%=genre.img%>" alt="" width="50">
+                                                        <% } else { %>
+                                                        <img src="<%=base_url%>admin/uploads/genres/default-genre.jpg" alt="" width="50">
+                                                        <% } %>
+                                                    </td>
+                                                    <td><%=genre.name%></td>
+                                                    <td>
+                                                        <div class="form-check form-switch"><input type="checkbox" onclick="changestatus(<%=genre.id%>,<%=genre.status%>)" class="form-check-input" <%=(genre.status==1)?'checked=""':''%>  /></div>
+                                                    </td>
+                                                    <td><a href="#"><span><i class="ri-edit-2-fill"></i></span></a></td>
+                                                </tr>
+                                           <%})%>
+                                        </tbody>
+                                     </table>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add-images" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Genre Image</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div id="upload-image"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> <button class="btn btn-success cropped_image" data-dismiss="modal">Crop Image</button> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%-include('./inc/footer');%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<!-- <script src="assets/js/croppie.js" ></script> -->
+<script src="https://foliotek.github.io/Croppie/croppie.js"></script>
+<script>
+    function changestatus(id,status){
+        if(status==0){
+            status=1
+        }else{
+            status=0
+        }
+        $.ajax({
+            type: "POST",
+            url: "<%=base_url%>admin/enable-disable-status?id="+id+"&status="+status,
+            success: function(data){window.location.reload()}      
+        });
+    }
+
+    $(function(){
+        $('#save-genre').validate({
+                rules: {
+                    genre_name: {
+                        required: true,
+                    },
+                    description: {
+                        required: false,
+                    },
+                    img: {
+                        required: false
+                    }
+                }
+                // submitHandler: function(form) {
+                //     if($('#img').val()==''){
+                //         $('#img-error').css('display','block')
+                //         return true;
+                //     }
+                //     $('.save').text('Loading...')
+                //     form.submit();
+                // }
+            });
+
+        $image_crop = $('#upload-image').croppie({
+            enableExif: true,
+            viewport: {
+                width: 293,
+                height: 195,
+                type: 'square'
+            },
+            boundary: {
+                width: 393,
+                height: 295
+            },
+            enforceBoundary: false,
+            enableExif: true,
+        });
+
+        $('#selectimg').on('change', function() {
+            let img = $(this);
+            var reader = new FileReader();
+            $("#preview").empty();
+            $('#img').val('')
+            reader.onload = function(e) {
+                $image_crop.croppie('bind', {
+                    url: e.target.result
+                }).then(function() {
+                    console.log('jQuery bind complete');
+                });
+            }
+            reader.readAsDataURL(this.files[0]);
+            $("#add-images").modal('show')
+        });
+        
+        $('.cropped_image').on('click', function(ev) {
+            $image_crop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function(response) {
+                $("#preview").empty();
+                $("#preview").append(`<img src="`+response+`">`)
+                $('#img').val(response)
+                $('#img-error').css('display','none')
+            });
+        });
+    })
+</script>

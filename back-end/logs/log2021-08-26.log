@@ -1,0 +1,246 @@
+Server running on port: 3001
+The db is connected: 
+select * from admin where username=?
+[ 'admin' ]
+null
+select COUNT(id) AS total_genres from genres
+[]
+null
+select COUNT(id) AS total_users from users
+[]
+null
+select COUNT(*) AS tot from cashapp_request where status=1
+[]
+null
+select COUNT(*) AS tot from billingdetails where paid='true'
+[]
+null
+select COUNT(id) AS total_cashapp from cashapp_request  where status = 0
+[]
+null
+select SUM(price) AS total_price from cashapp_request where status = 1
+[]
+null
+select SUM(amount) AS total_amount from billingdetails where mode='paypal' AND paid=1
+[]
+null
+select sum(amount) AS total_month_amount from billingdetails where MONTH(datetime)=MONTH(curdate()) AND paid=1
+[]
+null
+select sum(amount) AS total_month_amount from billingdetails where MONTH(datetime)=MONTH(20210731)  AND paid=1
+[]
+null
+Cash App Amount=0
+Paypal  Amount=0
+logout successfull!
+select * from admin where username=?
+[ 'admin' ]
+null
+select COUNT(id) AS total_genres from genres
+[]
+null
+select COUNT(id) AS total_users from users
+[]
+null
+select COUNT(*) AS tot from cashapp_request where status=1
+[]
+null
+select COUNT(*) AS tot from billingdetails where paid='true'
+[]
+null
+select COUNT(id) AS total_cashapp from cashapp_request  where status = 0
+[]
+null
+select SUM(price) AS total_price from cashapp_request where status = 1
+[]
+null
+select SUM(amount) AS total_amount from billingdetails where mode='paypal' AND paid=1
+[]
+null
+select sum(amount) AS total_month_amount from billingdetails where MONTH(datetime)=MONTH(curdate()) AND paid=1
+[]
+null
+select sum(amount) AS total_month_amount from billingdetails where MONTH(datetime)=MONTH(20210731)  AND paid=1
+[]
+null
+Cash App Amount=0
+Paypal  Amount=0
+logout successfull!
+select * from admin where username=?
+[ 'admin' ]
+null
+select COUNT(id) AS total_genres from genres
+[]
+null
+select COUNT(id) AS total_users from users
+[]
+null
+select COUNT(*) AS tot from cashapp_request where status=1
+[]
+null
+select COUNT(*) AS tot from billingdetails where paid='true'
+[]
+null
+select COUNT(id) AS total_cashapp from cashapp_request  where status = 0
+[]
+null
+select SUM(price) AS total_price from cashapp_request where status = 1
+[]
+null
+select SUM(amount) AS total_amount from billingdetails where mode='paypal' AND paid=1
+[]
+null
+select sum(amount) AS total_month_amount from billingdetails where MONTH(datetime)=MONTH(curdate()) AND paid=1
+[]
+null
+select sum(amount) AS total_month_amount from billingdetails where MONTH(datetime)=MONTH(20210731)  AND paid=1
+[]
+null
+Cash App Amount=0
+Paypal  Amount=0
+logout successfull!
+select * from admin where username=?
+[ 'admin' ]
+null
+select COUNT(id) AS total_genres from genres
+[]
+null
+select COUNT(id) AS total_users from users
+[]
+null
+select COUNT(*) AS tot from cashapp_request where status=1
+[]
+null
+select COUNT(*) AS tot from billingdetails where paid='true'
+[]
+null
+select COUNT(id) AS total_cashapp from cashapp_request  where status = 0
+[]
+null
+select SUM(price) AS total_price from cashapp_request where status = 1
+[]
+null
+select SUM(amount) AS total_amount from billingdetails where mode='paypal' AND paid=1
+[]
+null
+select sum(amount) AS total_month_amount from billingdetails where MONTH(datetime)=MONTH(curdate()) AND paid=1
+[]
+null
+select sum(amount) AS total_month_amount from billingdetails where MONTH(datetime)=MONTH(20210731)  AND paid=1
+[]
+null
+Cash App Amount=0
+Paypal  Amount=0
+select id,name from genres where status=1 ORDER BY id DESC
+[]
+null
+select *,(SELECT name from genres where id=beats.genre) as genrename from beats ORDER BY id DESC
+[]
+null
+select name,description,img,id from genres where status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where MONTH(datetime) = MONTH(CURRENT_DATE()) AND status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where featured=1 AND status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where exclusive=2 AND status=1 ORDER BY id DESC
+[]
+null
+null
+null
+null
+select name,description,img,id from genres where status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where MONTH(datetime) = MONTH(CURRENT_DATE()) AND status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where featured=1 AND status=1 ORDER BY id DESC
+[]
+null
+null
+null
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where exclusive=2 AND status=1 ORDER BY id DESC
+[]
+null
+select description,thumb,id,title,artist,demo_beat,price1,original_beat1,original_beat2,original_beat3,(SELECT name from genres where id=beats.genre) as genrename from beats where id =?
+[ '15' ]
+null
+select name,description,img,id from genres where status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where MONTH(datetime) = MONTH(CURRENT_DATE()) AND status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where featured=1 AND status=1 ORDER BY id DESC
+[]
+null
+null
+null
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where exclusive=2 AND status=1 ORDER BY id DESC
+[]
+null
+select name,description,img,id from genres where status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where MONTH(datetime) = MONTH(CURRENT_DATE()) AND status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where featured=1 AND status=1 ORDER BY id DESC
+[]
+null
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where exclusive=2 AND status=1 ORDER BY id DESC
+[]
+null
+null
+null
+select name,description,img,id from genres where status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where MONTH(datetime) = MONTH(CURRENT_DATE()) AND status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where featured=1 AND status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where exclusive=2 AND status=1 ORDER BY id DESC
+[]
+null
+null
+null
+null
+select name,description,img,id from genres where status=1 ORDER BY id DESC
+[]
+null
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where MONTH(datetime) = MONTH(CURRENT_DATE()) AND status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where featured=1 AND status=1 ORDER BY id DESC
+[]
+null
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where exclusive=2 AND status=1 ORDER BY id DESC
+[]
+null
+null
+select name,description,img,id from genres where status=1 ORDER BY id DESC
+[]
+null
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where MONTH(datetime) = MONTH(CURRENT_DATE()) AND status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where featured=1 AND status=1 ORDER BY id DESC
+[]
+null
+null
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where exclusive=2 AND status=1 ORDER BY id DESC
+[]
+null
+select name,description,img,id from genres where status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where MONTH(datetime) = MONTH(CURRENT_DATE()) AND status=1 ORDER BY id DESC
+[]
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where featured=1 AND status=1 ORDER BY id DESC
+[]
+null
+null
+null
+select title,description,artist,thumb,demo_beat,id,price1,(SELECT name from genres where id=beats.genre) as genrename from beats where exclusive=2 AND status=1 ORDER BY id DESC
+[]
+null
+select description,thumb,id,title,artist,demo_beat,price1,original_beat1,original_beat2,original_beat3,(SELECT name from genres where id=beats.genre) as genrename from beats where id =?
+[ '4' ]
+select id,title,artist,thumb,demo_beat,price1 from beats WHERE genre = (select genre from beats where id =?)
+[ '4' ]
+null
+null
+Server running on port: 3001
+The db is connected: 

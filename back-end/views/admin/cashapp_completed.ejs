@@ -1,0 +1,73 @@
+<%-include('./inc/header');%>
+
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page-title">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-xl-4">
+                            <div class="page-title-content">
+                                <h3>Complete CashApp Request</h3>
+                                <p class="mb-2">Welcome to HeatKings</p>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="breadcrumbs"><a href="#">CashApp </a><span><i class="ri-arrow-right-s-line"></i></span><a href="#">Pending Request</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-12">
+                <div class="settings-menu">
+                    <a href="/admin/cashapp">Pending(<%=cashapp_request%>)</a>
+                    <a href="/admin/cashapp_completed" class="active">Completed(<%=cashapp_completed.length%>)</a>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">CashApp Completed Request</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive api-table">
+                                    <table class="table">
+                                        <thead>
+                                           <tr>
+                                              <th>Sr.</th>
+                                              <th>Name</th>
+                                              <th>Email</th>
+                                              <th>Description</th>
+                                              <th>Total Price</th>
+                                              <th>Status</th>
+                                           </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%cashapp_completed.forEach(function(cashapp,index){%>
+                                                <tr>
+                                                    <td><%=index+1%></td>
+                                                    <td><%=cashapp.user_name%></td>
+                                                    <td><%=cashapp.user_email%></td>
+                                                    <td><%=cashapp.describtion%></td>
+                                                    <td>$ <%=cashapp.price%></td>
+                                                    <td>Completed</td>
+                                                </tr>
+                                           <%})%>
+                                           <%if(cashapp_completed.length==0){%>
+                                            <tr>
+                                                <td colspan="6" class="text-center">data not found</td>
+                                            </tr>
+                                            <%}%>
+                                        </tbody>
+                                     </table>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-include('./inc/footer');%>

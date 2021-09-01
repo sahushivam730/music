@@ -1,0 +1,58 @@
+{
+  "name": "front-end-music",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
+    "file-saver": "^2.0.5",
+    "js-file-downloader": "^1.1.20",
+    "jsonwebtoken": "^8.5.1",
+    "react": "^17.0.2",
+    "react-audio-player": "^0.17.0",
+    "react-bootstrap": "^1.6.1",
+    "react-dom": "^17.0.2",
+    "react-download-link": "^2.3.0",
+    "react-images-extended": "^0.6.4",
+    "react-jinke-music-player": "^4.24.1",
+    "react-multi-carousel": "^2.6.3",
+    "react-native-cache": "^2.0.1",
+    "react-paypal-checkout": "^1.0.9",
+    "react-router-dom": "^5.2.0",
+    "react-script": "^2.0.5",
+    "react-scripts": "^4.0.3",
+    "react-toastify": "^7.0.4",
+    "react-use-cart": "^1.11.2",
+    "react-validation": "^3.0.7",
+    "reactjs-localstorage": "^1.0.1",
+    "sweetalert": "^2.1.2",
+    "validator": "^13.6.0",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
